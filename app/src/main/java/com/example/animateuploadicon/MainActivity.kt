@@ -46,8 +46,8 @@ class MainActivity : AppCompatActivity() {
         isUploading = true
 
         // Create vertical translation animator for upload icon
-        uploadAnimator = ObjectAnimator.ofFloat(binding.uploadIcon, "translationY", 0f, -200f).apply {
-            duration = 800 // Duration of upward movement
+        uploadAnimator = ObjectAnimator.ofFloat(binding.uploadIcon, "translationY", 0f, -250f).apply {
+            duration = 1000 // Duration of upward movement
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.RESTART // Restart from origin each time
             interpolator = LinearInterpolator()
@@ -85,7 +85,6 @@ class MainActivity : AppCompatActivity() {
                 .setInterpolator(LinearOutSlowInInterpolator())
                 .start()
         }
-
 
         isUploading = false
         isUploadCompleted = true
