@@ -5,6 +5,7 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.graphics.Color
+import android.graphics.drawable.AnimatedVectorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.animation.LinearInterpolator
@@ -36,9 +37,9 @@ class MainActivity : AppCompatActivity() {
 
         // Setup button click listener
         binding.startUploadButton.setOnClickListener {
-            if (!isUploading && !isUploadCompleted) {
+//            if (!isUploading && !isUploadCompleted) {
                 startUploadAnimation()
-            }
+//            }
         }
     }
 
@@ -46,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         isUploading = true
 
         // Create vertical translation animator for upload icon
-        uploadAnimator = ObjectAnimator.ofFloat(binding.uploadIcon, "translationY", 0f, -250f).apply {
+        uploadAnimator = ObjectAnimator.ofFloat(binding.uploadIcon, "translationY", 0f, -100f).apply {
             duration = 1000 // Duration of upward movement
             repeatCount = ValueAnimator.INFINITE
             repeatMode = ValueAnimator.RESTART // Restart from origin each time
@@ -58,8 +59,6 @@ class MainActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.Main).launch {
             for (progress in 1..10) {
                 delay(500) // Simulate network delay
-//                val color = calculateProgressColor(progress.toFloat() * 10)
-//                binding.circularProgressRing.setColorFilter(color)
                 // Complete upload
                 if (progress == 10) {
                     completeUpload()
@@ -72,22 +71,24 @@ class MainActivity : AppCompatActivity() {
         // Stop upload animation
         uploadAnimator?.cancel()
 
-        // Hide upload icon
-        binding.uploadIcon.visibility = View.GONE
+        // Fade out upload icon while fading in complete icon
+        binding.uploadIcon.animate()
+            .alpha(0f)
+            .setDuration(500)
+            .withEndAction {
+                binding.uploadIcon.visibility = View.GONE
+                binding.circularYellowRing.visibility = View.GONE
+                // Show and fade in complete icon
+                binding.completeIcon.visibility = View.VISIBLE
 
-        // Show complete icon with fade in
-        binding.completeIcon.apply {
-            visibility = View.VISIBLE
-            alpha = 0f
-            animate()
-                .alpha(1f)
-                .setDuration(800)
-                .setInterpolator(LinearOutSlowInInterpolator())
-                .start()
-        }
+                binding.circularGreenRing.visibility = View.VISIBLE
+                val vectorDrawable1 = binding.completeIcon.drawable as AnimatedVectorDrawable
+                val vectorDrawable2 = binding.circularGreenRing.drawable as AnimatedVectorDrawable
+                vectorDrawable2.start()
+                vectorDrawable1.start()
+            }
+            .start()
 
-        isUploading = false
-        isUploadCompleted = true
     }
 
     private fun calculateProgressColor(progress: Float): Int {

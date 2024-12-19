@@ -8,44 +8,41 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/progress_container"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_centerInParent="true"
-        android:background="@color/black"
-        app:cardCornerRadius="75dp"
+        app:cardCornerRadius="60dp"
         >
-        <FrameLayout
+        <ImageView
+            android:id="@+id/circularYellowRing"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/circular_ring" />
+        <ImageView
+            android:id="@+id/circularGreenRing"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center"
+            android:src="@drawable/anim_ring_icon"
+            android:visibility="gone"
+            />
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            >
-
-            <ImageView
-                android:id="@+id/circularProgressRing"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
-                android:layout_gravity="center"
-                android:src="@drawable/circular_ring" />
-
-            <ImageView
-                android:id="@+id/uploadIcon"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_arrow_upward"
-                />
-            <ImageView
-                android:id="@+id/completeIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:src="@drawable/ic_check"
-                android:visibility="gone"/>
-
-        </FrameLayout>
+        <ImageView
+            android:id="@+id/uploadIcon"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_arrow_upward"
+            />
+        <ImageView
+            android:id="@+id/completeIcon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:src="@drawable/anim_arrow_icon"
+            android:visibility="gone"/>
     </androidx.cardview.widget.CardView>
-
 
     <Button
         android:id="@+id/startUploadButton"

@@ -1,0 +1,50 @@
+<animated-vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:aapt="http://schemas.android.com/aapt">
+    <aapt:attr name="android:drawable">
+        <vector
+            android:width="100dp"
+            android:height="100dp"
+            android:viewportWidth="100"
+            android:viewportHeight="100">
+            <!-- Background circle (full ring) -->
+            <path
+                android:name="backgroundCircle"
+                android:pathData="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                android:strokeColor="@color/grey"
+                android:strokeWidth="7"
+                android:strokeLineCap="round"
+                android:fillColor="@android:color/transparent"/>
+
+            <!-- Progress circle -->
+            <path
+                android:name="progressCircle"
+                android:pathData="M 50,50 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"
+                android:strokeColor="@color/green"
+                android:strokeWidth="7"
+                android:strokeLineCap="round"
+                android:fillColor="@android:color/transparent"
+                android:trimPathEnd="0"/>
+        </vector>
+    </aapt:attr>
+    <target android:name="progressCircle">
+        <aapt:attr name="android:animation">
+            <set>
+                <objectAnimator
+                    android:propertyName="trimPathEnd"
+                    android:duration="1000"
+                    android:valueFrom="0"
+                    android:valueTo="1"
+                    android:valueType="floatType"
+                    android:interpolator="@android:interpolator/linear"/>
+
+                <objectAnimator
+                    android:propertyName="strokeColor"
+                    android:duration="1000"
+                    android:valueFrom="@color/yellow"
+                    android:valueTo="@color/green"
+                    android:valueType="colorType"
+                    android:interpolator="@android:interpolator/linear"/>
+            </set>
+        </aapt:attr>
+    </target>
+</animated-vector>
